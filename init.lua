@@ -121,7 +121,7 @@ require'nvim-treesitter.configs'.setup {
         "lua",
         "markdown",
         "markdown_inline",
-        "nasm",
+        -- "nasm", -- Treesitter v0.9.1 doesn't have nasm support
         "rust",
         "vim",
         "vimdoc",
