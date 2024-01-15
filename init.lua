@@ -149,8 +149,7 @@ vim.keymap.set('n', '<leader>t', ':tabnew<CR>')
 vim.keymap.set('n', '<leader>l', ':tabnext<CR>')
 vim.keymap.set('n', '<leader>h', ':tabprevious<CR>')
 
--- Open Projects directory by default
---local dev_dir = "D:/Dev/Projects"
---vim.cmd.cd(dev_dir)
 
-
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
