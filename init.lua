@@ -150,6 +150,7 @@ vim.keymap.set('n', '<leader>l', ':tabnext<CR>')
 vim.keymap.set('n', '<leader>h', ':tabprevious<CR>')
 
 
+vim.opt.foldlevel = 100
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
