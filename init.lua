@@ -118,6 +118,8 @@ require'nvim-treesitter.configs'.setup {
         "bash",
         "c",
         "cpp",
+        "hlsl",
+        "glsl",
         "lua",
         "markdown",
         "markdown_inline",
@@ -154,3 +156,8 @@ vim.opt.foldlevel = 100
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
+
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  pattern = {"*.hlsl"},
+  command = "set filetype=hlsl",
+})
