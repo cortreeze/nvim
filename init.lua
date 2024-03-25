@@ -136,6 +136,65 @@ require'nvim-treesitter.configs'.setup {
     },
 }
 
+
+-- Helpers
+local function ask_save()
+    local result = 'Cancel'
+    vim.ui.select(
+        { 'Save', 'Lose', 'Cancel' },
+        { prompt = 'Buffer has unsaved changes. Save them before leave?' },
+        function(choice)
+            if choice then
+                result = choice
+            end
+        end
+    )
+
+    return result
+end
+
+local function get_listed_buffers()
+    local result = vim.tbl_filter(
+    function(b)
+        return (vim.fn.buflisted(b) == 1)
+    end,
+    vim.api.nvim_list_bufs()
+    )
+
+    return result
+end
+
+-- TODO: Add per window buffers history
+local function unlist_buffer(buffer_id)
+    local windows = vim.fn.win_findbuf(buffer_id)
+    for _, win_id in pairs(windows) do
+        vim.fn.win_execute(win_id, 'bprev')
+    end
+end
+
+local function kill_buffer()
+    if vim.fn.bufname() ~= '' and vim.bo.modified then
+        local should_save = ask_save()
+        if should_save == 'Cancel' then
+            return
+        end
+
+        local _ = (should_save == 'Save') and vim.cmd('silent write!') or vim.cmd('edit!')
+    end
+
+    unlist_buffer(vim.fn.winbufnr(0))
+    local buffers = get_listed_buffers()
+    if #buffers > 1 then
+        unlist_buffer(vim.fn.winbufnr(0))
+        vim.cmd('bd#')
+    else
+        vim.cmd('bd!')
+    end
+end
+
+vim.api.nvim_create_user_command('KillBuffer', kill_buffer, {});
+
+
 -- Keymap
 vim.keymap.set({'n', 'v'}, '<leader>y', '"+y')
 vim.keymap.set({'n', 'v'}, '<leader>Y', '"+Y')
@@ -152,6 +211,7 @@ vim.keymap.set('n', '<leader>t', ':tabnew<CR>')
 vim.keymap.set('n', '<leader>l', ':tabnext<CR>')
 vim.keymap.set('n', '<leader>h', ':tabprevious<CR>')
 
+vim.keymap.set('n', '<leader>kk', vim.cmd.KillBuffer, {})
 
 vim.opt.foldlevel = 100
 vim.opt.foldmethod = "expr"
