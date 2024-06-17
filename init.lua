@@ -68,7 +68,8 @@ require("lazy").setup({
     {"sainnhe/gruvbox-material"},
     {"nvim-lualine/lualine.nvim"},
     {"nvim-treesitter/nvim-treesitter", tag = "v0.9.1"},
-    {"nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = {"nvim-lua/plenary.nvim"}}
+    {"nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = {"nvim-lua/plenary.nvim"}},
+    {"neovim/nvim-lspconfig", tag = "v0.1.8"},
 })
 
 -- Trying to load colorscheme second time if it was not installed before startup
@@ -91,6 +92,38 @@ require("lualine").setup({
     }
 })
 
+-- LSP setup
+require('lspconfig').clangd.setup{}
+vim.opt.signcolumn = "yes" -- Prevents sidebar flickering on LSP rescan
+
+vim.api.nvim_create_autocmd('LspAttach', {
+group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<leader>gs', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, opts)
+    vim.keymap.set('n', '<C-k><C-o>', function()
+            vim.cmd("ClangdSwitchSourceHeader")
+        end, opts)
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+end,
+})
 
 -- Telescope config
 local ts_builtin = require('telescope.builtin')
@@ -206,6 +239,8 @@ vim.keymap.set({'n', 'v'}, '<leader>dd', '"+dd')
 
 vim.keymap.set('n', '<leader>p', '"+p')
 vim.keymap.set('n', '<leader>P', '"+P')
+vim.keymap.set('n', '<leader>p', '"+з')
+vim.keymap.set('n', '<leader>P', '"+З')
 
 vim.keymap.set('n', '<leader>t', ':tabnew<CR>')
 vim.keymap.set('n', '<leader>l', ':tabnext<CR>')
