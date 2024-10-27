@@ -11,6 +11,17 @@ if ! curl -V &> /dev/null; then
     exit 1
 fi
 
+if ! dpkg -l libreadline-dev &> /dev/null; then
+    echo "ERROR: libreadline-dev is required but not found. Install it with: sudo apt install libreadline-dev"
+    exit 1
+fi
+
+if ! dpkg -l ripgrep &> /dev/null; then
+    echo "ERROR: ripgrep is required but not found. Install it with: sudo apt install ripgrep"
+    exit 1
+fi
+
+
 NVIM_VERSION="stable"
 NVIM_PATH=/usr/local/bin/nvim.appimage
 NVIM_URL="https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim.appimage"
