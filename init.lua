@@ -67,8 +67,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {"sainnhe/gruvbox-material"},
     {"nvim-lualine/lualine.nvim"},
-    {"nvim-treesitter/nvim-treesitter", tag = "v0.9.1"},
-    {"nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = {"nvim-lua/plenary.nvim"}},
+    {"nvim-treesitter/nvim-treesitter", tag = "v0.9.3"},
+    {"nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = {"nvim-lua/plenary.nvim"}},
     {"neovim/nvim-lspconfig", tag = "v0.1.8"},
 })
 

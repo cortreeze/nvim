@@ -11,7 +11,7 @@ if ! curl -V &> /dev/null; then
     exit 1
 fi
 
-NVIM_VERSION="v0.9.5"
+NVIM_VERSION="stable"
 NVIM_PATH=/usr/local/bin/nvim.appimage
 NVIM_URL="https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim.appimage"
 NVIM_TEMP="$(mktemp)"
