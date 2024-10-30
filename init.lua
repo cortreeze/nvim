@@ -85,7 +85,7 @@ end
 -- Status line setup
 require("lualine").setup({
     options = {
-        icons_enabled = true,
+        icons_enabled = false,
         theme = 'auto',
         section_separators = {},
         component_separators = { left = '|', right = '|' },
