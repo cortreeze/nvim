@@ -147,15 +147,16 @@ require('telescope').setup {
 
 
 -- Treesitter config
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
     ensure_installed = {
         "bash",
         "bitbake",
         "c",
         "cpp",
         "devicetree",
-        "hlsl",
         "glsl",
+        "hlsl",
+        "javascript",
         "lua",
         "markdown",
         "markdown_inline",
