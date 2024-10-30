@@ -150,14 +150,16 @@ require('telescope').setup {
 require'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "bash",
+        "bitbake",
         "c",
         "cpp",
+        "devicetree",
         "hlsl",
         "glsl",
         "lua",
         "markdown",
         "markdown_inline",
-        -- "nasm", -- Treesitter v0.9.1 doesn't have nasm support
+        "nasm",
         "rust",
         "vim",
         "vimdoc",
