@@ -161,6 +161,7 @@ require('nvim-treesitter.configs').setup {
         "markdown",
         "markdown_inline",
         "nasm",
+        "python",
         "rust",
         "vim",
         "vimdoc",
