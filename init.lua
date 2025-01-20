@@ -93,7 +93,7 @@ require("lualine").setup({
 })
 
 -- LSP setup
-require('lspconfig').clangd.setup{}
+--require('lspconfig').clangd.setup{}
 vim.opt.signcolumn = "yes" -- Prevents sidebar flickering on LSP rescan
 
 vim.api.nvim_create_autocmd('LspAttach', {
