@@ -70,6 +70,7 @@ require("lazy").setup({
     {"nvim-treesitter/nvim-treesitter", tag = "v0.9.3"},
     {"nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = {"nvim-lua/plenary.nvim"}},
     {"neovim/nvim-lspconfig", tag = "v0.1.8"},
+    {"nvim-neorg/neorg", version = "*", lazy = false, dependencies = {"nvim-lua/plenary.nvim"}, cmd = "Neorg sync-parsers"},
 })
 
 -- Trying to load colorscheme second time if it was not installed before startup
@@ -80,6 +81,23 @@ if not colorscheme_status then
         vim.cmd.colorscheme(fallback_colorscheme)
     end
 end
+
+require("neorg").setup({
+    load = {
+        ["core.defaults"] = {},
+        ["core.concealer"] = {},
+        ["core.dirman"] = {
+            config = {
+                workspaces = {
+                    notes = "~/docs/notes",
+                },
+                default_workspace = "notes",
+                index = "index.norg",
+            }
+        },
+    }
+})
+
 
 -- TODO: Get rid of the plugin and configure the status line manually
 -- Status line setup
