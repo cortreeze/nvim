@@ -1,5 +1,5 @@
 -- Trying to load colorcheme first
-vim.opt.termguicolors = true
+vim.opt.termguicolors = false
 local colorscheme = "gruvbox-material"
 local fallback_colorscheme = "desert"
 local colorscheme_status, _ = pcall(vim.cmd.colorscheme, colorscheme)
@@ -67,9 +67,9 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {"sainnhe/gruvbox-material"},
     {"nvim-lualine/lualine.nvim"},
-    {"nvim-treesitter/nvim-treesitter", tag = "v0.9.3"},
-    {"nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = {"nvim-lua/plenary.nvim"}},
-    {"neovim/nvim-lspconfig", tag = "v0.1.8"},
+    {"nvim-treesitter/nvim-treesitter", tag = "v0.10.0"},
+    {"nvim-telescope/telescope.nvim", tag = "v0.2.1", dependencies = {"nvim-lua/plenary.nvim"}},
+    {"neovim/nvim-lspconfig", tag = "v2.9.0"},
     {"nvim-neorg/neorg", version = "*", lazy = false, dependencies = {"nvim-lua/plenary.nvim"}, cmd = "Neorg sync-parsers"},
 })
 
